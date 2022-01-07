@@ -59,7 +59,7 @@
         @php $i++; @endphp
 @endwhile --}}
 
-
+{{-- 
 @isset($fornecedores)    
     @foreach($fornecedores as $key => $fornecedor)
         Fornecedor: {{ $fornecedor['nome'] }}
@@ -85,4 +85,34 @@
         <hr>
         <br>
     @endforeach
+@endisset --}}
+
+
+@isset($fornecedores)    
+    @forelse($fornecedores as $key => $fornecedor)
+        Fornecedor: {{ $fornecedor['nome'] }}
+        <br>
+        Status: {{ $fornecedor['status'] }}
+        <br>
+        CNPJ: {{ $fornecedor['cnpj'] ?? 'Dado não foi preenchido' }}
+        <br>
+        TELEFONE: {{ $fornecedor['ddd'] ?? '' }} {{ $fornecedor['telefone'] ?? '' }}
+        @switch($fornecedor['ddd'])
+            @case('11')
+                São Paulo - SP
+                @break
+            @case('32')
+                Juiz de Fora - MG
+                @break
+            @case('85')
+                Fortaleza - CE
+                @break
+            @default
+                Estado não identificado
+        @endswitch
+        <hr>
+        <br>
+        @empty
+        Não Existem fornecedores Cadastrados
+    @endforelse
 @endisset
