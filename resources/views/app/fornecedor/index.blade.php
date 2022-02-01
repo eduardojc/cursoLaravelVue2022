@@ -90,6 +90,15 @@
 
 @isset($fornecedores)    
     @forelse($fornecedores as $key => $fornecedor)
+        {{-- @dd($loop) --}}
+        @if($loop->first)
+            Primeira iteração do loop
+        @elseif($loop->last)
+            Ultima iteração do loop
+        @endif
+        <br>
+        Iteração Atual: {{ $loop->iteration }}
+        <br>
         Fornecedor: {{ $fornecedor['nome'] }}
         <br>
         Status: {{ $fornecedor['status'] }}
@@ -110,6 +119,9 @@
             @default
                 Estado não identificado
         @endswitch
+        <br>
+        <br>
+        Total de Registros: {{ $loop->count }}
         <hr>
         <br>
         @empty
